@@ -5,9 +5,13 @@ Natural Language Processing (NLP) is a task where the goal is to determine wheth
 Example:
 
 Premise -> Hypothesis -> NLI -> UNLI
+
 A man in a white shirt taking a picture -> A man takes a picture -> ENT -> 100%
+
 A boy hits a ball, with a bat -> The kid is playing in a baseball game -> ENT -> 78%
+
 A wrestler in red cries, one in blue celebrates -> The wrestler in blue is undefeated -> CON -> 50%
+
 Man laying on a platform outside on rocks -> Man takes a nap on his couch -> CON -> 0%
 
 [UNLI](https://github.com/clips/wordkit) (Uncertain Natural Language Inference) is a new approach to Natural Language Inference that aims to predict the probability of a hypothesis being true, instead of simply assigning a categorical label like in NLI. 

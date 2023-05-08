@@ -20,10 +20,16 @@ A dataset called u-SNLI was created by labeling a portion of the widely-used SNL
 
 Example annotations:
 
-*Premise: A man is singing into a microphone.
-*Hypotheses:
+* Premise: A man is singing into a microphone.
+* Hypotheses:
+
 [0.946] A man performs a song.
+
 [0.840] A man is performing on stage.
+
 [0.152] A male performer is singing a special and meaningful song.
+
 [0.144] A man performing in a bar.
+
 [0.062] A man is singing the national anthem at a crowded stadium.
+

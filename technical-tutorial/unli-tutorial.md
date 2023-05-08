@@ -63,11 +63,44 @@ from datasets import load_dataset, DatasetDict
 
 ## 1. Reading in the corpora
 
+A zip file of the u-snli dataset can be downloaded as mentioned above and can be stored and accessed in the most suitable way. For ease, I store it in a google drive and read it as follows:
+```python
+from google.colab import drive
+
+drive.mount('/content/drive', force_remount=True)
+```
+
 ## 2. Setting a list of training sizes 
+
+The list of training sizes is used to explore how the performance of the model changes as the amount of training data increases. By training the model on different amounts of data, we can observe how the model's learning curve evolves. For the purpose of the tuyorial, the training sizes are:
+```python
+training_size = [15, 30]
+```
 
 ## 3. Loading data
 
+I load the data as follows:
+
+```python
+train = load_dataset('csv', data_files='path_to_u-snli_train.csv')
+
+test = load_dataset('csv', data_files='path_to_u-snli_test.csv')
+
+validation = load_dataset('csv', data_files='path_to_u-snli_dev.csv') 
+```
+
 ## 4. Definig the Model and Tokenizer
+
+The following code block uses the Hugging Face Transformers library to load a pre-trained BERT model and its corresponding tokenizer.
+
+The checkpoint variable is set to "bert-base-uncased", which is the name of a pre-trained BERT model provided by Hugging Face. The AutoTokenizer.from_pretrained() function is then called with the checkpoint parameter to create a tokenizer that can tokenize text input into the format expected by the BERT model.
+
+The AutoModelForSequenceClassification.from_pretrained() function is called with checkpoint and num_labels=1 parameters to load the pre-trained BERT model and initialize it for sequence classification tasks with a single output label. This will be useful for the current task of predicting a single numerical value as the output.
+```python
+checkpoint = "bert-base-uncased"
+tokenizer = AutoTokenizer.from_pretrained(checkpoint)
+model = AutoModelForSequenceClassification.from_pretrained(checkpoint, num_labels=1) 
+```
 
 ## 5. Tokenizing the data
 

@@ -1,6 +1,18 @@
 # UNLI: Regression modeling with Transformers
 
+Natural Language Processing (NLP) is a task where the goal is to determine whether a given statement (the "hypothesis") is entailed by or contradicts another statement (the "premise"). It is usually labeled as categories, such as "entailment", "contradiction" and "neutral". Traditionally, NLI has been approached as a categorical classification problem where the labels are coarse-grained and not able to capture the uncertain and probabilistic nature of entailment inference. In other words, not all contradictions or entailments are equally strong or certain, and assigning them to coarse categories may hide this variability. For example, some entailments may be highly probable, while others may be only slightly probable.
+
+Example:
+
+Premise -> Hypothesis -> NLI -> UNLI
+A man in a white shirt taking a picture -> A man takes a picture -> ENT -> 100%
+A boy hits a ball, with a bat -> The kid is playing in a baseball game -> ENT -> 78%
+A wrestler in red cries, one in blue celebrates -> The wrestler in blue is undefeated -> CON -> 50%
+Man laying on a platform outside on rocks -> Man takes a nap on his couch -> CON -> 0%
+
 [UNLI](https://github.com/clips/wordkit) (Uncertain Natural Language Inference) is a new approach to Natural Language Inference that aims to predict the probability of a hypothesis being true, instead of simply assigning a categorical label like in NLI. 
+
+In this tutorial, we will learn to create a regression model using transformers.
 
 
 *Let's get started!*
@@ -125,7 +137,7 @@ BATCH_SIZE = 8
 EPOCHS = 2
 
 training_args = TrainingArguments(
-  output_dir="/content/drive/My Drive/Colab Notebooks/CSC900/u-snli/results",
+  output_dir="Path_to_u-snli_results",
   learning_rate=LEARNING_RATE,
   per_device_train_batch_size=BATCH_SIZE,
   per_device_eval_batch_size=BATCH_SIZE,

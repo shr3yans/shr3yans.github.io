@@ -5,18 +5,17 @@
 
 *Let's get started!*
 
-## Installing WordKit
-You can install WordKit with pip on the command line using `pip install wordkit`. WordKit has the following requirements:
-* ipapy
-* numpy
+## Installing requirements:
+
+* transformers
+* datasets
 * pandas
-* reach
-* nltk
+* numpy
 * scikit-learn
 
 
 ## Data
-A dataset called u-SNLI was created by labeling a portion of the widely-used SNLI dataset using a probabilistic scale. The u-SNLI dataset is available for download [here](https://nlp.jhu.edu/unli/)and includes three files: train.csv, dev.csv, and test.csv. Each file contains columns for ID, Premise, Hypothesis, NLI label, and UNLI label.
+A dataset called u-SNLI was created by labeling a portion of the widely-used SNLI dataset using a probabilistic scale. The u-SNLI dataset is available for download [here](https://nlp.jhu.edu/unli/) and includes three files: train.csv, dev.csv, and test.csv. Each file contains columns for ID, Premise, Hypothesis, NLI label, and UNLI label.
 
 Example annotations:
 
@@ -33,3 +32,29 @@ Example annotations:
 
 [0.062] A man is singing the national anthem at a crowded stadium.
 
+## Imports
+
+We use the following in this tutorial:
+
+```python
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+import torch
+
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from sklearn.model_selection import train_test_split
+
+from transformers import (
+    AdamW, 
+    AutoTokenizer, 
+    AutoModel, 
+    AutoModelForSequenceClassification, 
+    Trainer, 
+    TrainingArguments, 
+    DataCollatorWithPadding,
+)
+
+from datasets import load_dataset, DatasetDict
+```

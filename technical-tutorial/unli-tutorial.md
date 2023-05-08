@@ -109,6 +109,45 @@ training_args = TrainingArguments(
 
 ## 7. Training the model
 
+A loop is created to train the model on different sizes of training data (15 and 30 in this case). The training data is tokenized and passed to the RegressionTrainer class provided by the Transformers library to train the model on the data.
+```python
+  trainer = RegressionTrainer(
+      model=model,
+      args=training_args,
+      train_dataset=ds[0],
+      eval_dataset=ds[1],
+      compute_metrics=compute_metrics_for_regression,
+  )
+
+  trainer.train()
+```
+
 ## 8. Evaluating the model
 
+After each training iteration, the model is evaluated on the validation and test datasets using the evaluate() method of the RegressionTrainer class. The evaluation metrics are calculated using the compute_metrics_for_regression() function defined as follows:
+```python
+def compute_metrics_for_regression(eval_pred):
+  logits, labels = eval_pred
+  labels = labels.reshape(-1, 1)
+      
+  mse = mean_squared_error(labels, logits)
+  mae = mean_absolute_error(labels, logits)
+  r2 = r2_score(labels, logits)
+      
+  return {"mse": mse, "mae": mae, "rmse": np.sqrt(mse), "r2": r2}
+```
+
 ## 9. Plotting the learning curve
+
+Finally, we can now plot a graph to see the learning curve of the model with respect to the mean squared error (MSE) metric for different training sizes. The following code shows an example for a different training size and mse values:
+```python
+import matplotlib.pyplot as plt
+training_size = [10, 15, 20, 25, 30]
+mse = [0.09804137051105499, 0.08982931077480316, 0.09684375673532486, 0.08992088586091995, 0.08983176201581955]
+print("Learning Curve for MSE \n")  
+plt.plot(training_size, mse)
+plt.xlabel('Train/Validation')
+plt.ylabel('MSE')
+plt.show()
+```
+

@@ -1,6 +1,6 @@
 # UNLI: Regression modeling with Transformers
 
-[UNLI](https://github.com/clips/wordkit) (Uncertain Natural Language Inference)is a new approach to Natural Language Inference that aims to predict the probability of a hypothesis being true, instead of simply assigning a categorical label like in NLI. 
+[UNLI](https://github.com/clips/wordkit) (Uncertain Natural Language Inference) is a new approach to Natural Language Inference that aims to predict the probability of a hypothesis being true, instead of simply assigning a categorical label like in NLI. 
 
 
 *Let's get started!*
@@ -58,3 +58,57 @@ from transformers import (
 
 from datasets import load_dataset, DatasetDict
 ```
+
+### Let's Begin!
+
+## 1. Reading in the corpora
+
+## 2. Setting a list of training sizes 
+
+## 3. Loading data
+
+## 4. Definig the Model and Tokenizer
+
+## 5. Tokenizing the data
+
+The tokenization function is defined to tokenize the text data using the BERT tokenizer. The function also sets the label for each example in the data.
+```python
+def tokenize_function(examples):
+    label = examples["unli"] 
+    examples = tokenizer(examples["pre"], examples["hyp"], truncation=True, padding="max_length", max_length=256)
+    
+    
+    examples["label"] = label
+    return examples
+```
+
+## 6. Defining the training arguments
+
+The training arguments are defined using the TrainingArguments class provided by the Transformers library. The arguments include the learning rate, batch size, number of epochs, evaluation strategy, and model saving strategy.
+```python
+LEARNING_RATE = 1e-5
+MAX_LENGTH = 256
+BATCH_SIZE = 8
+EPOCHS = 2
+
+training_args = TrainingArguments(
+  output_dir="/content/drive/My Drive/Colab Notebooks/CSC900/u-snli/results",
+  learning_rate=LEARNING_RATE,
+  per_device_train_batch_size=BATCH_SIZE,
+  per_device_eval_batch_size=BATCH_SIZE,
+  num_train_epochs=EPOCHS,
+  evaluation_strategy="epoch",
+  save_strategy="epoch",
+  save_total_limit=2,
+  metric_for_best_model="mse",
+  load_best_model_at_end=True,
+  weight_decay=0.01,
+)
+
+```
+
+## 7. Training the model
+
+## 8. Evaluating the model
+
+## 9. Plotting the learning curve

@@ -4,7 +4,7 @@ Natural Language Processing (NLP) is a task where the goal is to determine wheth
 
 Example:
 
-Premise -> Hypothesis -> NLI -> UNLI
+## Premise -> Hypothesis -> NLI -> UNLI
 
 A man in a white shirt taking a picture -> A man takes a picture -> ENT -> 100%
 
